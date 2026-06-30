@@ -5,5 +5,7 @@
 "main": "src/agent.js",
 "scripts": {
 "start": "node src/agent.js"
-}
+},
+"author": "phucuong1972",
+"license": "MIT"
 }
