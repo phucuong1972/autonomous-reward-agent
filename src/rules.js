@@ -1,7 +1,9 @@
 // Reward rules file
 
+const config = require("../config/config.json");
+
 function checkRewardRule() {
-return true;
+return config.dailyBudget > 0;
 }
 
 module.exports = checkRewardRule;
