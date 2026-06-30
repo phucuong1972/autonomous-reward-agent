@@ -8,7 +8,7 @@ const logAction = require("./logger");
 logAction("Agent started");
 
 if (checkRewardRule()) {
-sendReward();
+sendReward(config.rewardAmount);
 logAction("Reward amount: " + config.rewardAmount);
 logAction("Reward process completed");
 }
