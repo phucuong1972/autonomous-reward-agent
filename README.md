@@ -52,3 +52,33 @@ Unicity Testnet v2
 
 ## Status
 Early development
+# Build Path
+
+### Phase 1: Project Definition
+- Define the problem and autonomous workflow
+- Specify agent behavior and network primitives
+
+### Phase 2: MVP Development
+- Create the agent event loop
+- Implement predefined reward rules
+- Add payment execution logic
+- Add action logging
+
+### Phase 3: Network Integration
+- Connect to Unicity Testnet v2
+- Enable identity, messaging, and settlement functionality
+
+### Phase 4: Deployment
+- Deploy the application publicly
+- Test autonomous execution flow
+- Prepare submission materials
+
+## Agentic Status
+
+Yes
+
+The agent autonomously initiates and completes economic actions after rules are defined.
+
+## AstridOS Status
+
+Planned / Not yet integrated
