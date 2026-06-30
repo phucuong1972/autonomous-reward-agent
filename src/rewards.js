@@ -1,3 +1,7 @@
 // Reward execution file
 
-console.log("Reward system loaded");
+function sendReward() {
+console.log("Reward sent");
+}
+
+module.exports = sendReward;
