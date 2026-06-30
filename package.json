@@ -1,3 +1,6 @@
 {
-"name": "autonomous-reward-agent"
+"name": "autonomous-reward-agent",
+"version": "1.0.0",
+"description": "Autonomous reward agent for Unicity Testnet v2",
+"main": "src/agent.js"
 }
