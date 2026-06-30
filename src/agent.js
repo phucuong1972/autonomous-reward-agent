@@ -10,5 +10,5 @@ logAction("Agent started");
 if (checkRewardRule()) {
 sendReward(config.rewardAmount);
 logAction("Reward amount: " + config.rewardAmount);
-logAction("Reward process completed");
+logAction("Reward of " + config.rewardAmount + " completed");
 }
