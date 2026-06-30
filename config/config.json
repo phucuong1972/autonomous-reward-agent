@@ -1,1 +1,5 @@
-{}
+{
+"rewardAmount": 5,
+"dailyBudget": 100,
+"network": "testnet2"
+}
