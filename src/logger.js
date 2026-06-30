@@ -1,3 +1,7 @@
 // Action logging file
 
-console.log("Logging system loaded");
+function logAction(message) {
+console.log("[LOG]: " + message);
+}
+
+module.exports = logAction;
