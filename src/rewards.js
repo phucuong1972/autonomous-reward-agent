@@ -1,7 +1,7 @@
 // Reward execution file
 
-function sendReward() {
-console.log("Reward sent");
+function sendReward(amount) {
+console.log("Reward sent: " + amount);
 }
 
 module.exports = sendReward;
