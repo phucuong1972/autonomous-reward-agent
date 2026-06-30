@@ -82,3 +82,11 @@ The agent autonomously initiates and completes economic actions after rules are 
 ## AstridOS Status
 
 Planned / Not yet integrated
+
+## Current Progress
+
+- Project repository created
+- Agent workflow connected
+- Reward rules implemented
+- Logging system implemented
+- Config-based reward handling added
