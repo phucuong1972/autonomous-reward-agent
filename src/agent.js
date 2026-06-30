@@ -1,7 +1,12 @@
 // Main agent entry point
 
-require("./rules");
-require("./rewards");
-require("./logger");
+const checkRewardRule = require("./rules");
+const sendReward = require("./rewards");
+const logAction = require("./logger");
 
-console.log("Autonomous Reward Agent started");
+logAction("Agent started");
+
+if (checkRewardRule()) {
+sendReward();
+logAction("Reward process completed");
+}
