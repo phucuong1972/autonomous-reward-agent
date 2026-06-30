@@ -91,7 +91,7 @@ Planned / Not yet integrated
 - Logging system implemented
 - Config-based reward handling added
 
-- ## Run Instructions
+## Run Instructions
 
 1. Clone the repository
 
