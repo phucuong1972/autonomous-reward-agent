@@ -90,3 +90,33 @@ Planned / Not yet integrated
 - Reward rules implemented
 - Logging system implemented
 - Config-based reward handling added
+
+- ## Run Instructions
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/phucuong1972/autonomous-reward-agent.git
+```
+
+2. Enter the project directory
+
+```bash
+cd autonomous-reward-agent
+```
+
+3. Run the application
+
+```bash
+npm start
+```
+
+Expected output:
+
+```text
+[LOG]: Agent started
+Reward sent: 5
+[LOG]: Reward amount: 5
+[LOG]: Reward of 5 completed
+```
+
