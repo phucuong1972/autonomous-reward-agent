@@ -1,3 +1,7 @@
 // Reward rules file
 
-console.log("Reward rules loaded");
+function checkRewardRule() {
+return true;
+}
+
+module.exports = checkRewardRule;
