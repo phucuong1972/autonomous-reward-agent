@@ -1,1 +1,1 @@
-Project architecture draft
+Create initial architecture documentation for Autonomous Reward Agent
