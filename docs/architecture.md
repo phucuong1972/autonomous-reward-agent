@@ -4,6 +4,7 @@ Autonomous Reward Agent
 
 Workflow:
 
+```text
 User event
 ↓
 Agent starts
@@ -17,6 +18,7 @@ Execute reward
 Record logs
 ↓
 Complete process
+```
 
 Modules:
 
