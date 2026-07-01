@@ -4,8 +4,10 @@ const config = require("../config/config.json");
 const checkRewardRule = require("./rules");
 const sendReward = require("./rewards");
 const logAction = require("./logger");
+const getDirectId = require("./get-wallet-id");
 
 logAction("Starting " + config.agentName);
+logAction("Agent identity: " + getDirectId());
 logAction("Listening for event: " + config.eventName);
 logAction("Network: " + config.network);
 logAction("Reward recipient: " + config.userId);
