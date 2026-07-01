@@ -26,5 +26,5 @@ config.rewardAmount +
 event
 );
 } else {
-logAction("Reward conditions not met");
+logAction("Reward conditions not met for event: " + event);
 }
