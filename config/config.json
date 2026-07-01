@@ -2,5 +2,6 @@
 "rewardAmount": 5,
 "dailyBudget": 100,
 "network": "testnet2",
-"eventName": "task_completed"
+"eventName": "task_completed",
+"userId": "user001"
 }
