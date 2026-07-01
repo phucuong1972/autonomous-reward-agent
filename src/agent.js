@@ -12,6 +12,7 @@ logAction("Reward recipient: " + config.userId);
 const event = config.eventName;
 
 logAction("Received event: " + event);
+logAction("Evaluating reward conditions");
 
 if (event === config.eventName && checkRewardRule()) {
 sendReward(config.rewardAmount);
