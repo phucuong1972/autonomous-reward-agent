@@ -32,7 +32,17 @@ config.rewardAmount +
 " completed for event " +
 event
 );
-logAction("Remaining budget: " + config.dailyBudget);
+logAction(
+"Reward of " +
+config.rewardAmount +
+" completed for event " +
+event
+);
+
+const remainingBudget =
+config.dailyBudget - config.rewardAmount;
+
+logAction("Remaining budget: " + remainingBudget);
 } else {
 logAction(
 "Reward conditions not met for event: " +
