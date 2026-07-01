@@ -7,6 +7,8 @@ const logAction = require("./logger");
 
 logAction("Listening for event: " + config.eventName);
 
+const event = "task_completed";
+
 if (checkRewardRule()) {
 sendReward(config.rewardAmount);
 logAction("Reward amount: " + config.rewardAmount);
