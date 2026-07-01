@@ -17,7 +17,12 @@ config.rewardAmount +
 " sent to " +
 config.userId
 );
-logAction("Reward of " + config.rewardAmount + " completed");
+logAction(
+"Reward of " +
+config.rewardAmount +
+" completed for event " +
+event
+);
 } else {
 logAction("Reward conditions not met");
 }
