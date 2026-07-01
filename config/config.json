@@ -4,4 +4,5 @@
 "network": "testnet2",
 "eventName": "task_completed",
 "userId": "user001"
+"agentName": "Autonomous Reward Agent"
 }
