@@ -29,5 +29,10 @@ event
 );
 logAction("Remaining budget: " + config.dailyBudget);
 } else {
-logAction("Reward conditions not met for event: " + event);
+logAction(
+"Reward conditions not met for event: " +
+event +
+". Budget: " +
+config.dailyBudget
+);
 }
