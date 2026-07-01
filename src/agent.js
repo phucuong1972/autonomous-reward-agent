@@ -8,6 +8,7 @@ const logAction = require("./logger");
 logAction("Listening for event: " + config.eventName);
 logAction("Network: " + config.network);
 logAction("Reward recipient: " + config.userId);
+logAction("Agent initialization complete");
 
 const event = config.eventName;
 
