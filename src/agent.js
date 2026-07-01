@@ -13,4 +13,6 @@ if (event === config.eventName && checkRewardRule()) {
 sendReward(config.rewardAmount);
 logAction("Reward amount: " + config.rewardAmount);
 logAction("Reward of " + config.rewardAmount + " completed");
+} else {
+logAction("Reward conditions not met");
 }
