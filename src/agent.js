@@ -5,6 +5,7 @@ const checkRewardRule = require("./rules");
 const sendReward = require("./rewards");
 const logAction = require("./logger");
 
+logAction("Starting " + config.agentName);
 logAction("Listening for event: " + config.eventName);
 logAction("Network: " + config.network);
 logAction("Reward recipient: " + config.userId);
