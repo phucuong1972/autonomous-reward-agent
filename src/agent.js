@@ -16,6 +16,7 @@ logAction("Evaluating reward conditions");
 logAction("Configured reward amount: " + config.rewardAmount);
 
 if (event === config.eventName && checkRewardRule()) {
+logAction("Reward conditions satisfied");
 sendReward(config.rewardAmount);
 logAction(
 "Reward amount: " +
