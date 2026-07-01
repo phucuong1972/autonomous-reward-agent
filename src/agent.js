@@ -6,6 +6,7 @@ const sendReward = require("./rewards");
 const logAction = require("./logger");
 
 logAction("Listening for event: " + config.eventName);
+logAction("Network: " + config.network);
 
 const event = config.eventName;
 
