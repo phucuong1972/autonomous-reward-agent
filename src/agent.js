@@ -9,7 +9,7 @@ logAction("Listening for event: " + config.eventName);
 
 const event = "task_completed";
 
-if (checkRewardRule()) {
+if (event === config.eventName && checkRewardRule()) {
 sendReward(config.rewardAmount);
 logAction("Reward amount: " + config.rewardAmount);
 logAction("Reward of " + config.rewardAmount + " completed");
