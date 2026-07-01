@@ -9,6 +9,8 @@ logAction("Listening for event: " + config.eventName);
 
 const event = config.eventName;
 
+logAction("Received event: " + event);
+
 if (event === config.eventName && checkRewardRule()) {
 sendReward(config.rewardAmount);
 logAction(
