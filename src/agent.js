@@ -32,12 +32,6 @@ config.rewardAmount +
 " completed for event " +
 event
 );
-logAction(
-"Reward of " +
-config.rewardAmount +
-" completed for event " +
-event
-);
 
 const remainingBudget =
 config.dailyBudget - config.rewardAmount;
