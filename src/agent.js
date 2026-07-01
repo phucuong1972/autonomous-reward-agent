@@ -26,6 +26,7 @@ config.rewardAmount +
 " completed for event " +
 event
 );
+logAction("Remaining budget: " + config.dailyBudget);
 } else {
 logAction("Reward conditions not met for event: " + event);
 }
