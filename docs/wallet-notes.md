@@ -1,0 +1,9 @@
+- Mnemonic loaded from .env
+- identityFromMnemonicSync() works
+- generateAddressFromMasterKey(masterPrivateKey, 0) works
+- Account object:
+- privateKey
+- publicKey
+- path: m/44'/0'/0'
+- index: 0
+- getAddressId(account.publicKey) returns a DIRECT address
