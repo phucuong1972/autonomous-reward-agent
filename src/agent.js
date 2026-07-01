@@ -5,7 +5,7 @@ const checkRewardRule = require("./rules");
 const sendReward = require("./rewards");
 const logAction = require("./logger");
 
-logAction("Agent started");
+logAction("Listening for event: " + config.eventName);
 
 if (checkRewardRule()) {
 sendReward(config.rewardAmount);
