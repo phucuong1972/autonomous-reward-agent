@@ -1,29 +1,46 @@
 const config = require("../config/config.json");
 
-let generated = false;
+/**
+ * Event Provider Interface (v1)
+ * - returns array of events
+ * - must be stateless or externally backed
+ */
 
-async function getEvents() {
-
-  // Temporary event source.
-  // Later this will become:
-  // - Sphere events
-  // - REST API
-  // - Webhook
-  // - Blockchain events
-
-  if (generated) {
-    return [];
+class MockEventProvider {
+  constructor() {
+    this.generated = false;
   }
 
-  generated = true;
+  async getEvents() {
+    // simulate 1-time event stream
+    if (this.generated) return [];
 
-  return [
-    {
-      id: "task-001",
-      name: config.eventName,
-      createdAt: new Date().toISOString()
-    }
-  ];
+    this.generated = true;
+
+    return [
+      {
+        id: "task-001",
+        type: config.eventName,
+        timestamp: Date.now()
+      }
+    ];
+  }
+}
+
+/**
+ * Factory (future-proof)
+ */
+function createEventProvider() {
+  // later we can switch by config:
+  // if (config.provider === "sphere") return new SphereProvider();
+
+  return new MockEventProvider();
+}
+
+const provider = createEventProvider();
+
+async function getEvents() {
+  return provider.getEvents();
 }
 
 module.exports = {

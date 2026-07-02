@@ -1,14 +1,39 @@
-/// Agent bootstrap
-
 const config = require("../config/config.json");
 const logAction = require("./logger");
 const getDirectId = require("./get-wallet-id");
 const { initializeSphere } = require("./sphere");
 const { startAgentLoop } = require("./agent-loop");
 
-async function main() {
-  let sphere;
+let sphere = null;
+let shuttingDown = false;
 
+async function shutdown(signal) {
+  if (shuttingDown) {
+    return;
+  }
+
+  shuttingDown = true;
+
+  logAction(`Received ${signal}. Shutting down agent...`);
+
+  try {
+    if (sphere && typeof sphere.destroy === "function") {
+      await sphere.destroy();
+      logAction("Sphere runtime stopped.");
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+  logAction("Agent stopped.");
+
+  process.exit(0);
+}
+
+process.on("SIGINT", () => shutdown("SIGINT"));
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+
+async function main() {
   try {
     sphere = await initializeSphere();
 
@@ -25,23 +50,11 @@ async function main() {
 
     logAction("Agent initialization complete");
 
-    // Start the autonomous loop.
     await startAgentLoop(sphere);
 
   } catch (err) {
     console.error(err);
-  } finally {
-    if (sphere) {
-      console.log("Destroying Sphere...");
-
-      if (typeof sphere.destroy === "function") {
-        await sphere.destroy();
-      }
-
-      console.log("Sphere destroyed.");
-    }
-
-    process.exit(0);
+    await shutdown("ERROR");
   }
 }
 

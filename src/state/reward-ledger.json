@@ -1,0 +1,18 @@
+[
+  {
+    "eventId": "task-001",
+    "status": "FAILED",
+    "amount": 5,
+    "recipient": "DIRECT://00004a75390859265d1bf4cda0c47a04d9b4bfe3289588ab1620021c6c2ae75312eed6c3026f",
+    "reason": "SEND_INSUFFICIENT_BALANCE",
+    "timestamp": "2026-07-02T08:02:44.611Z"
+  },
+  {
+    "eventId": "task-001",
+    "status": "FAILED",
+    "amount": 5,
+    "recipient": "DIRECT://00004a75390859265d1bf4cda0c47a04d9b4bfe3289588ab1620021c6c2ae75312eed6c3026f",
+    "reason": "SEND_INSUFFICIENT_BALANCE",
+    "timestamp": "2026-07-02T08:20:40.569Z"
+  }
+]

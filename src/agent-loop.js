@@ -12,6 +12,7 @@ const {
   clearRetry
 } = require("./retry-manager");
 const { getEvents } = require("./event-source");
+const { addEntry } = require("./reward-ledger");
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -32,6 +33,14 @@ async function processEvent(event, sphere) {
 
   if (!checkRewardRule()) {
     logAction("Reward conditions not satisfied.");
+
+    addEntry({
+      eventId: event.id,
+      status: "RULE_NOT_SATISFIED",
+      amount: config.rewardAmount,
+      recipient: sphere.identity.directAddress
+    });
+
     return;
   }
 
@@ -45,16 +54,32 @@ async function processEvent(event, sphere) {
   if (payment.success) {
     logAction("Reward payment completed.");
 
+    addEntry({
+      eventId: event.id,
+      status: "SUCCESS",
+      amount: config.rewardAmount,
+      recipient: sphere.identity.directAddress
+    });
+
     markProcessed(event.id);
     clearRetry(event.id);
 
   } else {
+
     logAction(
       "Reward skipped: " +
       payment.code +
       " - " +
       payment.error
     );
+
+    addEntry({
+      eventId: event.id,
+      status: "FAILED",
+      amount: config.rewardAmount,
+      recipient: sphere.identity.directAddress,
+      reason: payment.code
+    });
 
     recordFailure(event.id);
   }
