@@ -36,3 +36,7 @@ Complete process
 - `logger.js` → records agent activity
 - `config.json` → stores configurable runtime settings
 - `.env` → stores the local mnemonic used by the agent
+
+### Identity and Authentication
+
+The agent derives a persistent non-custodial Unicity DIRECT identity from a locally stored mnemonic. It generates a public key from its identity, cryptographically signs messages, and successfully verifies signed messages using the Sphere SDK. These capabilities provide a foundation for authenticated interactions with other network participants.
