@@ -13,7 +13,7 @@ async function initializeSphere() {
     dataDir: "./wallet-data",
     tokensDir: "./tokens-data",
     oracle: {
-      apiKey: "sk_ddc3cfcc001e4a28ac3fad7407f99590"
+      apiKey: process.env.UNICITY_ORACLE_API_KEY
     }
   });
 
