@@ -1,0 +1,13 @@
+{
+  "reward": {
+    "requireVerification": true,
+
+    "minimumScore": 50,
+
+    "bonusScore": 80,
+
+    "standardReward": 5,
+
+    "bonusReward": 10
+  }
+}

@@ -1,112 +1,136 @@
 const config = require("../config/config.json");
-const checkRewardRule = require("./rules");
-const { sendReward } = require("./payment-service");
 const logAction = require("./logger");
+const { getEvents } = require("./event-source");
+const { decide } = require("./decision-engine");
+
 const {
   hasProcessed,
   markProcessed
 } = require("./history");
+
 const {
   shouldRetry,
   recordFailure,
   clearRetry
 } = require("./retry-manager");
-const { getEvents } = require("./event-source");
-const { addEntry } = require("./reward-ledger");
+
+const { sendReward } = require("./payment-service");
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function processEvent(event, sphere) {
-  if (hasProcessed(event.id)) {
-    logAction("Skipping processed event: " + event.id);
-    return;
-  }
+async function executeAction(action, event, sphere) {
 
-  if (!shouldRetry(event.id)) {
-    logAction("Waiting before retrying event: " + event.id);
-    return;
-  }
+  switch (action.action) {
 
-  logAction("Processing event: " + event.id);
+    case "REWARD": {
 
-  if (!checkRewardRule()) {
-    logAction("Reward conditions not satisfied.");
+      logAction(
+        `Action: REWARD (${action.reward} tokens)`
+      );
 
-    addEntry({
-      eventId: event.id,
-      status: "RULE_NOT_SATISFIED",
-      amount: config.rewardAmount,
-      recipient: sphere.identity.directAddress
-    });
+      const payment = await sendReward(sphere, {
+        recipient: sphere.identity.directAddress,
+        amount: action.reward
+      });
 
-    return;
-  }
+      if (payment.success) {
 
-  logAction("Reward conditions satisfied.");
+        markProcessed(event.id);
+        clearRetry(event.id);
 
-  const payment = await sendReward(sphere, {
-    recipient: sphere.identity.directAddress,
-    amount: config.rewardAmount
-  });
+        logAction(
+          `Rewarded ${event.user} with ${action.reward} tokens`
+        );
 
-  if (payment.success) {
-    logAction("Reward payment completed.");
+      } else {
 
-    addEntry({
-      eventId: event.id,
-      status: "SUCCESS",
-      amount: config.rewardAmount,
-      recipient: sphere.identity.directAddress
-    });
+        recordFailure(event.id);
 
-    markProcessed(event.id);
-    clearRetry(event.id);
+        logAction(
+          "Reward failed: " + payment.error
+        );
 
-  } else {
+      }
 
-    logAction(
-      "Reward skipped: " +
-      payment.code +
-      " - " +
-      payment.error
-    );
+      break;
+    }
 
-    addEntry({
-      eventId: event.id,
-      status: "FAILED",
-      amount: config.rewardAmount,
-      recipient: sphere.identity.directAddress,
-      reason: payment.code
-    });
+    case "IGNORE":
 
-    recordFailure(event.id);
+      logAction(
+        `Action: IGNORE (${action.reason})`
+      );
+
+      break;
+
+    case "RETRY":
+
+      logAction(
+        `Action: RETRY (${action.reason})`
+      );
+
+      break;
+
+    case "ERROR":
+
+      logAction(
+        `Action: ERROR (${action.reason})`
+      );
+
+      break;
   }
 }
 
+async function processEvent(event, sphere) {
+
+  logAction(
+    `Processing ${event.id} | user=${event.user} | score=${event.score} | verified=${event.verified}`
+  );
+
+  const action = decide(event, {
+    hasProcessed,
+    shouldRetry
+  });
+
+  await executeAction(action, event, sphere);
+}
+
 async function startAgentLoop(sphere) {
+
   logAction("Agent loop started.");
 
   while (true) {
+
     try {
+
       const events = await getEvents();
 
       if (events.length === 0) {
+
         logAction("No new events.");
+
       } else {
+
         for (const event of events) {
           await processEvent(event, sphere);
         }
+
       }
 
     } catch (err) {
+
       logAction("Loop error: " + err.message);
+
     }
 
     logAction("Sleeping for 10 seconds...");
+
     await sleep(10000);
+
   }
+
 }
 
 module.exports = {

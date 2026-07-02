@@ -14,5 +14,45 @@
     "recipient": "DIRECT://00004a75390859265d1bf4cda0c47a04d9b4bfe3289588ab1620021c6c2ae75312eed6c3026f",
     "reason": "SEND_INSUFFICIENT_BALANCE",
     "timestamp": "2026-07-02T08:20:40.569Z"
+  },
+  {
+    "eventId": "task-1",
+    "status": "FAILED",
+    "amount": 5,
+    "recipient": "DIRECT://00004a75390859265d1bf4cda0c47a04d9b4bfe3289588ab1620021c6c2ae75312eed6c3026f",
+    "reason": "SEND_INSUFFICIENT_BALANCE",
+    "timestamp": "2026-07-02T08:30:55.201Z"
+  },
+  {
+    "eventId": "task-2",
+    "status": "FAILED",
+    "amount": 5,
+    "recipient": "DIRECT://00004a75390859265d1bf4cda0c47a04d9b4bfe3289588ab1620021c6c2ae75312eed6c3026f",
+    "reason": "SEND_INSUFFICIENT_BALANCE",
+    "timestamp": "2026-07-02T08:31:15.478Z"
+  },
+  {
+    "eventId": "task-3",
+    "status": "FAILED",
+    "amount": 5,
+    "recipient": "DIRECT://00004a75390859265d1bf4cda0c47a04d9b4bfe3289588ab1620021c6c2ae75312eed6c3026f",
+    "reason": "SEND_INSUFFICIENT_BALANCE",
+    "timestamp": "2026-07-02T08:31:15.979Z"
+  },
+  {
+    "eventId": "task-4",
+    "status": "FAILED",
+    "amount": 5,
+    "recipient": "DIRECT://00004a75390859265d1bf4cda0c47a04d9b4bfe3289588ab1620021c6c2ae75312eed6c3026f",
+    "reason": "SEND_INSUFFICIENT_BALANCE",
+    "timestamp": "2026-07-02T08:31:26.304Z"
+  },
+  {
+    "eventId": "task-5",
+    "status": "FAILED",
+    "amount": 5,
+    "recipient": "DIRECT://00004a75390859265d1bf4cda0c47a04d9b4bfe3289588ab1620021c6c2ae75312eed6c3026f",
+    "reason": "SEND_INSUFFICIENT_BALANCE",
+    "timestamp": "2026-07-02T08:31:26.798Z"
   }
 ]
