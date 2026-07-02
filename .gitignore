@@ -141,3 +141,16 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Local Sphere runtime
+wallet-data/
+tokens-data/
+
+# SDK exploration files
+inspect-*.js
+inspect-*.mjs
+
+test-*.js
+test-*.mjs
+
+payments-module.txt
