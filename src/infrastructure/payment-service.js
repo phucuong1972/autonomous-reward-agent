@@ -1,4 +1,4 @@
-const logAction = require("./logger");
+const logAction = require("../logger");
 
 async function sendReward(
   sphere,
@@ -10,6 +10,7 @@ async function sendReward(
   }
 ) {
   try {
+
     logAction("Initializing payment service...");
 
     const request = {
@@ -39,6 +40,7 @@ async function sendReward(
       error: err.message,
       code: err.code || "UNKNOWN_ERROR"
     };
+
   }
 }
 

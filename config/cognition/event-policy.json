@@ -1,0 +1,31 @@
+{
+  "events": {
+    "task_completed": {
+      "enabled": true,
+      "actions": [
+        "reward"
+      ]
+    },
+
+    "reward_requested": {
+      "enabled": true,
+      "actions": [
+        "validate"
+      ]
+    },
+
+    "task_failed": {
+      "enabled": true,
+      "actions": [
+        "ignore"
+      ]
+    },
+
+    "manual_review": {
+      "enabled": true,
+      "actions": [
+        "queue"
+      ]
+    }
+  }
+}

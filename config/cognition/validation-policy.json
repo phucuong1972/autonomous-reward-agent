@@ -1,0 +1,8 @@
+{
+  "validation": {
+    "requireVerification": true,
+    "minimumScore": 40,
+    "allowDuplicateRewards": false,
+    "requireEligibleEvent": true
+  }
+}

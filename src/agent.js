@@ -1,13 +1,20 @@
 const config = require("../config/config.json");
 const logAction = require("./logger");
 const getDirectId = require("./get-wallet-id");
-const { initializeSphere } = require("./sphere");
-const { startAgentLoop } = require("./agent-loop");
+
+const {
+  initializeSphere
+} = require("./infrastructure/sphere");
+
+const {
+  startAgentLoop
+} = require("./infrastructure/agent-loop");
 
 let sphere = null;
 let shuttingDown = false;
 
 async function shutdown(signal) {
+
   if (shuttingDown) {
     return;
   }
@@ -17,24 +24,34 @@ async function shutdown(signal) {
   logAction(`Received ${signal}. Shutting down agent...`);
 
   try {
+
     if (sphere && typeof sphere.destroy === "function") {
+
       await sphere.destroy();
+
       logAction("Sphere runtime stopped.");
+
     }
+
   } catch (err) {
+
     console.error(err);
+
   }
 
   logAction("Agent stopped.");
 
   process.exit(0);
+
 }
 
 process.on("SIGINT", () => shutdown("SIGINT"));
 process.on("SIGTERM", () => shutdown("SIGTERM"));
 
 async function main() {
+
   try {
+
     sphere = await initializeSphere();
 
     logAction("Starting " + config.agentName);
@@ -53,9 +70,13 @@ async function main() {
     await startAgentLoop(sphere);
 
   } catch (err) {
+
     console.error(err);
+
     await shutdown("ERROR");
+
   }
+
 }
 
 main();

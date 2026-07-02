@@ -1,0 +1,8 @@
+{
+  "retry": {
+    "enabled": true,
+    "maxAttempts": 5,
+    "retryIntervalSeconds": 300,
+    "strategy": "fixed"
+  }
+}

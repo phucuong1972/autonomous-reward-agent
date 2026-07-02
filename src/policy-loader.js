@@ -1,36 +1,17 @@
 const fs = require("fs");
 const path = require("path");
 
-const cache = new Map();
-
-function loadPolicy(policyName) {
-  if (cache.has(policyName)) {
-    return cache.get(policyName);
-  }
-
+function loadPolicy(name) {
   const filePath = path.join(
     __dirname,
-    "..",
-    "config",
-    "policies",
-    `${policyName}.json`
+    "../config/cognition",
+    `${name}.json`
   );
 
-  const policy = JSON.parse(
-    fs.readFileSync(filePath, "utf8")
-  );
-
-  cache.set(policyName, policy);
-
-  return policy;
-}
-
-function reloadPolicy(policyName) {
-  cache.delete(policyName);
-  return loadPolicy(policyName);
+  const raw = fs.readFileSync(filePath, "utf-8");
+  return JSON.parse(raw);
 }
 
 module.exports = {
-  loadPolicy,
-  reloadPolicy
+  loadPolicy
 };

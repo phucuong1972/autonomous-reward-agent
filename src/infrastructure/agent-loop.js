@@ -1,7 +1,7 @@
-const config = require("../config/config.json");
-const logAction = require("./logger");
+const logAction = require("../logger");
+
 const { getEvents } = require("./event-source");
-const { decide } = require("./decision-engine");
+const { sendReward } = require("./payment-service");
 
 const {
   hasProcessed,
@@ -14,10 +14,24 @@ const {
   clearRetry
 } = require("./retry-manager");
 
-const { sendReward } = require("./payment-service");
+const {
+  perceive
+} = require("../cognition/perception/perception");
+
+const {
+  buildKnowledge
+} = require("../cognition/knowledge/knowledge");
+
+const {
+  reason
+} = require("../cognition/reasoning/reasoner");
+
+const {
+  decide
+} = require("../cognition/decision/decision-engine");
 
 function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function executeAction(action, event, sphere) {
@@ -26,9 +40,7 @@ async function executeAction(action, event, sphere) {
 
     case "REWARD": {
 
-      logAction(
-        `Action: REWARD (${action.reward} tokens)`
-      );
+      logAction(`Action: REWARD (${action.reward} tokens)`);
 
       const payment = await sendReward(sphere, {
         recipient: sphere.identity.directAddress,
@@ -58,43 +70,62 @@ async function executeAction(action, event, sphere) {
     }
 
     case "IGNORE":
-
-      logAction(
-        `Action: IGNORE (${action.reason})`
-      );
-
+      logAction(`Action: IGNORE (${action.reason})`);
       break;
 
     case "RETRY":
-
-      logAction(
-        `Action: RETRY (${action.reason})`
-      );
-
+      logAction(`Action: RETRY (${action.reason})`);
       break;
 
     case "ERROR":
+      logAction(`Action: ERROR (${action.reason})`);
+      break;
 
-      logAction(
-        `Action: ERROR (${action.reason})`
-      );
-
+    default:
+      logAction("Action: UNKNOWN");
       break;
   }
+
 }
 
 async function processEvent(event, sphere) {
 
   logAction(
-    `Processing ${event.id} | user=${event.user} | score=${event.score} | verified=${event.verified}`
+    `Processing ${event.id} | type=${event.type} | user=${event.user} | score=${event.score} | verified=${event.verified}`
   );
 
-  const action = decide(event, {
-    hasProcessed,
-    shouldRetry
+  // Brain
+
+  const observation = perceive(event);
+
+  const knowledge = buildKnowledge(observation);
+
+  const reasoning = reason(knowledge);
+
+  const action = decide({
+
+    observation,
+
+    knowledge,
+
+    reasoning,
+
+    event,
+
+    sphere,
+
+    services: {
+
+      hasProcessed,
+
+      shouldRetry
+
+    }
+
   });
 
   await executeAction(action, event, sphere);
+
 }
 
 async function startAgentLoop(sphere) {
@@ -114,7 +145,9 @@ async function startAgentLoop(sphere) {
       } else {
 
         for (const event of events) {
+
           await processEvent(event, sphere);
+
         }
 
       }
